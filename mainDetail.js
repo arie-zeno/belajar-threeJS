@@ -133,4 +133,4 @@ function createGLBViewer(containerId, glbPath) {
 }
 
 // Contoh pemakaian
-createGLBViewer("modal3d4", "/assets/puskesmas/puskes_final2.glb");
+createGLBViewer("modal3d5", "/assets/puskesmas/Puskes_Sungai_Andai.glb");
