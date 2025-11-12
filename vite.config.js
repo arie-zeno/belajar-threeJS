@@ -7,7 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         detail: resolve(__dirname, 'detail.html'),
-        detailHD: resolve(__dirname, 'detail-hd.html'),
+        explore: resolve(__dirname, 'explore.html'),
       },
     },
     

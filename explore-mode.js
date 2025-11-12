@@ -2,8 +2,11 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
-function createGLBViewer(containerId, glbPath) {
+// Export fungsi agar bisa diimpor di explore.html
+export function createGLBViewer(containerId, glbPath) {
   const container = document.getElementById(containerId);
+  if (!container) return; // Tambahkan cek untuk keamanan
+
   const width = container.clientWidth;
   const height = container.clientHeight;
 
@@ -24,7 +27,7 @@ function createGLBViewer(containerId, glbPath) {
 
   const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 2000);
   camera.position.set(0, 2, 5);
-  const initialY = camera.position.y; // Simpan posisi awal kamera (batas bawah)
+  const initialY = camera.position.y; 
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(width, height);
@@ -91,7 +94,7 @@ function createGLBViewer(containerId, glbPath) {
       const size = box.getSize(new THREE.Vector3());
 
       // Simpan batas area
-      const margin = 0.0001;
+      const margin = 3;
       bounds = {
         minX: box.min.x - margin,
         maxX: box.max.x + margin,
@@ -165,5 +168,3 @@ function createGLBViewer(containerId, glbPath) {
     renderer.setSize(container.clientWidth, container.clientHeight);
   });
 }
-
-createGLBViewer("modal3d4", "/assets/puskesmas/Puskes_Sungai_Andai.glb");

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mode Jelajah 3D</title>
+    <style>
+        body, html { margin: 0; padding: 0; overflow: hidden; height: 100%; background-color: #333; }
+        #viewer-container { 
+            width: 100vw; 
+            height: 100vh; 
+            position: relative; 
+        }
+        /* Style untuk tombol kembali */
+        #back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10000; /* Pastikan di atas loader dan viewer */
+            padding: 10px 15px;
+            background-color: #007bff; /* Warna biru Bootstrap */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none; /* Hilangkan garis bawah jika menggunakan tag <a> */
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        #back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="viewer-container"></div>
+    
+    <a href="index.html" id="back-button">
+        &larr; Kembali ke Daftar
+    </a>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+            "three/examples/jsm/loaders/GLTFLoader.js": "https://unpkg.com/three@0.165.0/examples/jsm/loaders/GLTFLoader.js",
+            "three/examples/jsm/loaders/DRACOLoader.js": "https://unpkg.com/three@0.165.0/examples/jsm/loaders/DRACOLoader.js"
+          }
+        }
+    </script>
+
+    <script type="module">
+        import { FASKE_MODELS } from "./faskes-data.js"; 
+        import { createGLBViewer } from "./explore-mode.js"; 
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const faskesId = urlParams.get('id');
+
+            if (!faskesId) {
+                document.getElementById('viewer-container').innerHTML = "<h1>ID Fasilitas tidak ditemukan.</h1>";
+                return;
+            }
+
+            const faskes = FASKE_MODELS.find(f => f.id === faskesId);
+            
+            if (faskes && faskes.path) {
+                createGLBViewer("viewer-container", faskes.path); 
+            } else {
+                document.getElementById('viewer-container').innerHTML = `<h1>Model untuk ID ${faskesId} tidak ditemukan.</h1>`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mode Jelajah 3D</title>
+    <style>
+        body, html { margin: 0; padding: 0; overflow: hidden; height: 100%; background-color: #333; }
+        #viewer-container { 
+            width: 100vw; 
+            height: 100vh; 
+            position: relative; 
+        }
+        /* Style untuk tombol kembali */
+        #back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10000; /* Pastikan di atas loader dan viewer */
+            padding: 10px 15px;
+            background-color: #007bff; /* Warna biru Bootstrap */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none; /* Hilangkan garis bawah jika menggunakan tag <a> */
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        #back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+            "three/examples/jsm/loaders/GLTFLoader.js": "https://unpkg.com/three@0.165.0/examples/jsm/loaders/GLTFLoader.js",
+            "three/examples/jsm/loaders/DRACOLoader.js": "https://unpkg.com/three@0.165.0/examples/jsm/loaders/DRACOLoader.js"
+          }
+        }
+    </script>
+  <script type="module" crossorigin src="/assets/explore-sB8wP7fx.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/faskes-data-87wLLlVL.js">
+  <link rel="modulepreload" crossorigin href="/assets/DRACOLoader-DuWmjkEA.js">
+</head>
+<body>
+    <div id="viewer-container"></div>
+    
+    <a href="index.html" id="back-button">
+        &larr; Kembali ke Daftar
+    </a>
+
+
+
+</body>
+</html>
