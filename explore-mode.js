@@ -2,10 +2,9 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
-// Export fungsi agar bisa diimpor di explore.html
 export function createGLBViewer(containerId, glbPath) {
   const container = document.getElementById(containerId);
-  if (!container) return; // Tambahkan cek untuk keamanan
+  if (!container) return; 
 
   const width = container.clientWidth;
   const height = container.clientHeight;
@@ -93,7 +92,6 @@ export function createGLBViewer(containerId, glbPath) {
       const center = box.getCenter(new THREE.Vector3());
       const size = box.getSize(new THREE.Vector3());
 
-      // Simpan batas area
       const margin = 3;
       bounds = {
         minX: box.min.x - margin,
@@ -104,10 +102,8 @@ export function createGLBViewer(containerId, glbPath) {
         maxZ: box.max.z + margin,
       };
 
-      // Posisikan kamera di depan model
       camera.position.set(center.x, initialY, box.max.z + size.z * 0.2);
 
-      // Render pertama lalu hilangkan overlay
       renderer.compile(scene, camera);
       requestAnimationFrame(() => {
         renderer.render(scene, camera);
@@ -146,11 +142,10 @@ export function createGLBViewer(containerId, glbPath) {
       if (move.left) newPos.addScaledVector(right, -velocity);
       if (move.right) newPos.addScaledVector(right, velocity);
       if (camMove.up) newPos.y += velocity;
-      if (camMove.down && newPos.y > initialY) newPos.y -= velocity; // ⛔ Tidak boleh lebih rendah dari Y awal
-
+      if (camMove.down && newPos.y > initialY) newPos.y -= velocity; 
       // Batasi dalam bounding box
       newPos.x = Math.max(bounds.minX, Math.min(bounds.maxX, newPos.x));
-      newPos.y = Math.max(initialY, Math.min(bounds.maxY, newPos.y)); // ⛔ Batas bawah = initialY
+      newPos.y = Math.max(initialY, Math.min(bounds.maxY, newPos.y)); 
       newPos.z = Math.max(bounds.minZ, Math.min(bounds.maxZ, newPos.z));
 
       camera.position.copy(newPos);

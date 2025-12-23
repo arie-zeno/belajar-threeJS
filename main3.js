@@ -4,7 +4,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-// Ekspor fungsi agar dapat digunakan di app.js
 export function createGLBViewer(containerId, glbPath) {
   const container = document.getElementById(containerId);
   if (!container) return; 
@@ -36,17 +35,14 @@ export function createGLBViewer(containerId, glbPath) {
   container.appendChild(renderer.domElement);
 
   // === LIGHTING ===
- // 1. AmbientLight (Cahaya Langit/Pengisi)
-// Warna biru pucat (B0E0E6) untuk meniru pantulan langit, intensitas rendah (0.3)
 const ambientLight = new THREE.AmbientLight(0xB0E0E6, 0.3);
 
 // 2. DirectionalLight (Matahari)
-// Warna putih hangat (FFFFE0) dan intensitas tinggi (1.5) untuk dominasi cahaya matahari
 const directionalLight = new THREE.DirectionalLight(0xFFFFE0, 1.5);
 
 // Posisi tetap baik untuk mereplikasi arah datangnya cahaya matahari
 directionalLight.position.set(10, 25, 20);
-directionalLight.target.position.set(0, 0, 0); // Menunjuk ke pusat adegan
+directionalLight.target.position.set(0, 0, 0); 
   scene.add(ambientLight, directionalLight);
 
   // === CONTROLS ===
@@ -58,7 +54,6 @@ directionalLight.target.position.set(0, 0, 0); // Menunjuk ke pusat adegan
   // === LOADING MODEL ===
   const loader = new GLTFLoader();
   const dracoLoader = new DRACOLoader();
-  // Menggunakan CDN yang andal
   // dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.6/"); 
 dracoLoader.setDecoderPath("/node_modules/three/examples/jsm/libs/draco/"); 
 
@@ -73,30 +68,20 @@ dracoLoader.setDecoderPath("/node_modules/three/examples/jsm/libs/draco/");
       model.position.set(0, 0, 0);
       scene.add(model);
 
-      // --- REVISI LOADING (Lebih Agresif dalam Menunda Hapus Overlay) ---
-      
-      // 1. Paksa kompilasi model dan shader (Ini langkah sinkronus yang berat)
       renderer.compile(scene, camera);
       
-      // 2. Render satu frame wajib segera setelah kompilasi
       renderer.render(scene, camera);
       
-      // 3. Tambahkan tunda waktu yang lebih lama (300ms) untuk memastikan 
-      //    browser selesai me-repaint dan model terlihat jelas di layar.
       setTimeout(() => {
         loaderOverlay.style.opacity = "0";
-        // Hapus elemen setelah transisi fade out (500ms) selesai
         setTimeout(() => loaderOverlay.remove(), 500);
-      }, 300); // Tunda diperpanjang menjadi 300ms
+      }, 300); 
 
-      // --- AKHIR REVISI LOADING ---
     },
     (xhr) => {
-      // Progress unduhan
       const pct = ((xhr.loaded / xhr.total) * 100).toFixed(0);
       loaderOverlay.textContent = `Loading ${pct}%`;
       
-      // Tampilkan status "Processing" setelah unduhan 100%
       if (xhr.loaded === xhr.total && loaderOverlay.textContent !== "Processing 3D...") {
           loaderOverlay.textContent = "Processing 3D...";
       }

@@ -1,4 +1,4 @@
-import{F as K}from"./faskes-data-87wLLlVL.js";import{c as P,d as F,W as R,A as V,D as B,G as W,e as I,B as O,V as u,f as G}from"./DRACOLoader-DuWmjkEA.js";function H(x,w){const a=document.getElementById(x);if(!a)return;const p=a.clientWidth,y=a.clientHeight,l=document.createElement("div");l.style.cssText=`
+import{F as K}from"./faskes-data-Isz66isy.js";import{c as P,d as F,W as R,A as V,D as B,G as W,e as I,B as O,V as u,f as G}from"./DRACOLoader-DuWmjkEA.js";function H(x,w){const a=document.getElementById(x);if(!a)return;const p=a.clientWidth,y=a.clientHeight,l=document.createElement("div");l.style.cssText=`
     position:absolute;top:0;left:0;width:100%;height:100%;
     background:rgba(0,0,0,0.85);color:white;
     display:flex;align-items:center;justify-content:center;

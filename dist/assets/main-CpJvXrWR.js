@@ -1,4 +1,4 @@
-import{F as a}from"./faskes-data-87wLLlVL.js";function i(){const e=document.querySelector("#faskesTableBody");e&&(e.innerHTML="",a.forEach((t,n)=>{const o=e.insertRow(),d=`detail.html?id=${t.id}`,r=`explore.html?id=${t.id}`;o.innerHTML=`
+import{F as a}from"./faskes-data-Isz66isy.js";function i(){const e=document.querySelector("#faskesTableBody");e&&(e.innerHTML="",a.forEach((t,n)=>{const o=e.insertRow(),d=`detail.html?id=${t.id}`,r=`explore.html?id=${t.id}`;o.innerHTML=`
       <th scope="row">${n+1}</th>
       <td>${t.name}</td>
       <td class="text-center">

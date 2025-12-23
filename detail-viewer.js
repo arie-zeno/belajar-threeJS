@@ -9,6 +9,7 @@ function getQueryParameter(name) {
 document.addEventListener("DOMContentLoaded", () => {
     const modelId = getQueryParameter('id');
     const containerId = 'dynamic-glb-container';
+    const containerEmbed = document.getElementById('embed-container');
     const detailTitle = document.getElementById('detailTitle');
     const pageTitle = document.getElementById('pageTitle');
     
@@ -20,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const titleText = `3D Model: ${faskes.name}`;
             detailTitle.textContent = titleText;
             pageTitle.textContent = titleText;
+            containerEmbed.innerHTML = faskes.embed || '';
+            console.log(`embed: ${faskes.embed}`);
 
             // Panggil Fungsi Viewer
             createGLBViewer(containerId, faskes.path);
